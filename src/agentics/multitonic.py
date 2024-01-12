@@ -19,13 +19,13 @@ class AutoGenPlanner:
         f"Reply TERMINATE when the task is done."
     )
 
-    def __init__(self, kernel: semantic_kernel.Kernel, llm_config: Dict = None, builder_config_path: str = None, zilliz_config: Dict = None):
+    def __init__(self, kernel: semantic_kernel.Kernel, llm_config: Dict = None, builder_config_path: str = None):
         self.kernel = kernel
         self.llm_config = llm_config or {}
         self.builder_config_path = builder_config_path
 #       self.validate_llm_config()
         self.builder = self.create_builder()
-        self.Zilliz_agent = ZillizRetrievalAgent(**zilliz_config) if zilliz_config else None
+#       self.Zilliz_agent = ZillizRetrievalAgent(**zilliz_config) if zilliz_config else None
 
     def execute_code(self, code: str) -> str:
         """
@@ -82,10 +82,10 @@ class AutoGenPlanner:
             function_map=self.__get_function_map(),
         )
     
-    def perform_retrieval(self, query_vector: List[float], top_k: int = 10):
-        if not self.Zilliz_agent:
-            raise ValueError("Zilliz agent is not configured.")
-        return self.Zilliz_agent.search([query_vector], top_k, {"nprobe": 16})
+    # def perform_retrieval(self, query_vector: List[float], top_k: int = 10):
+    #     if not self.Zilliz_agent:
+    #         raise ValueError("Zilliz agent is not configured.")
+    #     return self.Zilliz_agent.search([query_vector], top_k, {"nprobe": 16})
 
 #   def validate_llm_config(self):
 #       if self.llm_config.get("type") == "openai":

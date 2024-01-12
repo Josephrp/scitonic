@@ -1,0 +1,4 @@
+streamlit
+autogen
+openai
+semantic-kernel
