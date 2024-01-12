@@ -23,13 +23,13 @@ Multitonic is an AGI consultant designed to produce multimedia and actionable co
 ## Installation 📥
 ```bash
 # Clone the repository
-git clone https://github.com/multitonic/multitonic.git
+git clone https://github.com/Tonic-AI/multitonic.git
 
 # Navigate to the repository
 cd multitonic
 
 # Install dependencies
-npm install
+pip install -r requirements.txt
 ```
 ## Usage 🖥️
 - **Set Up Your Database**: Follow our step-by-step guide to initialize your databases.
