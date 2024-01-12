@@ -1,0 +1,15 @@
+gradio 
+requests
+datasets
+faiss-cpu
+texify
+chromadb
+chroma_datasets
+langchain[all]
+langchain-community
+langchain-cli
+torch
+transformers
+accelerate
+python-dotenv
+openai

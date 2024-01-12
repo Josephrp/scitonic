@@ -1,3 +1,15 @@
-# RAG App
+---
+title: E5
+emoji: 🐨
+colorFrom: indigo
+colorTo: pink
+sdk: gradio
+sdk_version: 4.13.0
+app_file: app.py
+pinned: false
+license: mit
+---
 
-this is where we will basically produce a simple RAG app using Tonic AI and Llama-index or something.
+# E5
+
+this is the RAG Application start
