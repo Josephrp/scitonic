@@ -2,7 +2,7 @@ from typing import Optional, Dict, List
 import semantic_kernel, autogen
 import datetime
 import autogen
-from .agent_builder import AgentBuilder
+from ..agentics.agent_builder import AgentBuilder
 
 class AutoGenPlanner:
     """
