@@ -1,30 +1,24 @@
-# Multitonic: Your AGI-Powered Consulting Companion 🚀
+# 🌟 Sci-Tonic: Your Ultimate Technical Research Assistant 🚀
 
-Welcome to **Multitonic**, your cutting-edge Artificial General Intelligence (AGI) consultant! We're here to revolutionize the way you handle data and insights, offering a comprehensive suite of tools and services that cater to all your consulting needs. Dive into our world where efficiency meets accuracy, all at a fraction of the traditional cost.
+Welcome to **Sci-Tonic** 🎉, the groundbreaking technical research assistant designed for professionals, researchers, and enthusiasts alike! If you're looking to dive deep into the world of data, ranging from financial figures 📈 to scientific articles 🧬, and transform them into insightful, long-form multimedia outputs 📊📚, you've just found your new best friend! 🤖👩‍🔬👨‍💼
 
-## Table of Contents 📚
-- [About Multitonic](#about-multitonic)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#CONTRIBUTING-GUIDE)
-- [Authors and Acknowledgment](#authors-and-acknowledgment)
+## Features 🌈
 
-## About Multitonic 🌟
-Multitonic is an AGI consultant designed to produce multimedia and actionable consulting assets with ease. Our platform integrates seamlessly with your existing systems, providing in-depth analysis, data management, and strategic insights.
+Sci-Tonic is packed with amazing features:
 
-## Features 🛠️
-- **Automated Consulting**: 
-- **Advanced Analytics**: Leverage multitonic for deep insights into operational, financial, and customer data.
-- **Accessible**: User-friendly interface for easy navigation and operation.
-- **BI-on-the-fly**: find intelligence and produce advanced modelling on-the-fly 
-- **Secure Application Thread**:  
-- **Adaptive**: adaptive responses that can do much more than text.
+- **Data Retrieval**: Effortlessly fetch data from a vast array of sources. Financial reports, scientific papers, complex texts - you name it, Sci-Tonic retrieves it! 🌍🔍
+- **Advanced Analysis**: Using cutting-edge AI, Sci-Tonic analyzes and interprets your data, providing you with deep insights. 🧠💡
+- **Multimedia Output**: Get your results the way you want them. Text, infographics, video summaries - Sci-Tonic does it all! 📝🎥📊
+- **User-Friendly Interface**: Whether you're a tech guru or a newbie, our intuitive interface makes your research journey smooth and enjoyable. 🖥️😊
+- **Collaboration Tools**: Teamwork makes the dream work! Collaborate seamlessly with colleagues or classmates. 👥🤝
 
-## Installation 📥
+## Getting Started 🚦
+
+
+### Installation 📥
 ```bash
 # Clone the repository
-git clone https://github.com/Tonic-AI/multitonic.git
+git clone https://github.com/Tonic-AI/scitonic.git
 
 # Navigate to the repository
 cd multitonic
@@ -32,6 +26,7 @@ cd multitonic
 # Install dependencies
 pip install -r requirements.txt
 ```
+
 ## Usage 🖥️
 - **Set Up Your Database**: Follow our step-by-step guide to initialize your databases.
 - **Import Data**: Utilize our tools to import and cleanse your data.
