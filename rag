@@ -1,0 +1,159 @@
+import os
+import google.generativeai as genai
+from transformers import AutoTokenizer, AutoModel
+import chromadb
+import torch
+import torch
+import torch.nn.functional as F
+from langchain.prompts.prompt import PromptTemplate
+from torch import Tensor
+import pandas as pd
+from datasets import Dataset
+from dotenv import load_dotenv
+
+load_dotenv()
+unstructured_api_key = os.getenv('UNSTRUCTURED_API_KEY')
+openai_api_key = os.getenv('OPENAI_API_KEY')
+
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
+print("Loading tokenizer and model...")
+tokenizer = AutoTokenizer.from_pretrained('intfloat/e5-mistral-7b-instruct',torch_dtype=torch.float16, device=device)
+model = AutoModel.from_pretrained('intfloat/e5-mistral-7b-instruct',torch_dtype=torch.float16, device_map=device)
+
+print("Tokenizer and model loaded.")
+
+def last_token_pool(last_hidden_states: Tensor,
+                 attention_mask: Tensor) -> Tensor:
+    left_padding = (attention_mask[:, -1].sum() == attention_mask.shape[0])
+    if left_padding:
+        return last_hidden_states[:, -1]
+    else:
+        sequence_lengths = attention_mask.sum(dim=1) - 1
+        batch_size = last_hidden_states.shape[0]
+        return last_hidden_states[torch.arange(batch_size, device=last_hidden_states.device), sequence_lengths]
+
+
+def get_detailed_instruct(task_description: str, query: str) -> str:
+    return f'Instruct: {task_description}\nQuery: {query}'
+
+def get_task_def_by_task_name_and_type(task_name: str):
+  task_name_to_instruct: Dict[str, str] = {
+      'ArguAna': 'Given a claim, find documents that refute the claim',
+        'ClimateFEVER': 'Given a claim about climate change, retrieve documents that support or refute the claim',
+        'DBPedia': 'Given a query, retrieve relevant entity descriptions from DBPedia',
+        'FEVER': 'Given a claim, retrieve documents that support or refute the claim',
+        'FiQA2018': 'Given a financial question, retrieve user replies that best answer the question',
+        'HotpotQA': 'Given a multi-hop question, retrieve documents that can help answer the question',
+        'MSMARCO': 'Given a web search query, retrieve relevant passages that answer the query',
+        'NFCorpus': 'Given a question, retrieve relevant documents that best answer the question',
+        'NQ': 'Given a question, retrieve Wikipedia passages that answer the question',
+        'QuoraRetrieval': 'Given a question, retrieve questions that are semantically equivalent to the given question',
+        'SCIDOCS': 'Given a scientific paper title, retrieve paper abstracts that are cited by the given paper',
+        'SciFact': 'Given a scientific claim, retrieve documents that support or refute the claim',
+        'Touche2020': 'Given a question, retrieve detailed and persuasive arguments that answer the question',
+        'TRECCOVID': 'Given a query on COVID-19, retrieve documents that answer the query',
+  }
+
+  return task_name_to_instruct[task_name]
+
+
+collection_name = "collection"
+
+def generate_embeddings_of_query(task_name, query:str):
+  input_text = get_detailed_instruct(get_task_def_by_task_name_and_type(task_name), query)
+  inputs = tokenizer(input_text, return_tensor = "pt", padding = True, truncation = True , max_length = 4096)
+  outputs = model(**inputs)
+  pooled_output = last_token_pool(outputs.last_hidden_state, inputs["attention_mask"])
+  normalized_embeddings = F.normalize(pooled_output, p =2, dim = 1).squeeze().tolist()
+  return normalized_embeddings
+
+def generate_and_store_embeddings(task_name, texts, collection_name):
+    print("Generating and storing embeddings...")
+    chroma_client = chromadb.Client()
+
+    # Check if collection exists, if not create one
+    try:
+        collection = chroma_client.create_collection(name = collection_name)
+        print(f"New collection '{collection_name}' created.")
+    except chromadb.db.base.UniqueConstraintError:
+        collection = chroma_client.get_collection(collection_name)
+        print(f"Using existing collection '{collection_name}'.")
+
+    # Convert texts to a Hugging Face dataset
+    df = pd.DataFrame({'text': texts, 'index': range(len(texts))})
+    hf_dataset = Dataset.from_pandas(df)
+
+    # Process and add each text to the collection
+    if task_name in task_name_to_instruct:
+      for index_, row in enumerate(hf_dataset):
+          formatted_text = get_detailed_instruct(get_task_def_by_task_name_and_type(task_name), row['text'])
+          inputs = tokenizer(formatted_text, return_tensors="pt", padding=True, truncation=True, max_length=4096)
+          outputs = model(**inputs)
+          pooled_output = last_token_pool(outputs.last_hidden_state, inputs['attention_mask'])
+          normalized_embeddings = F.normalize(pooled_output, p=2, dim=1).squeeze().tolist()
+
+          # Add to collection
+          collection.add(
+              ids=[str(index_)],
+              documents=[row['text']],
+              embeddings=[normalized_embeddings],
+              metadatas=[{"type": "text"}]
+          )
+
+          # Free up memory
+          del inputs, outputs, pooled_output, normalized_embeddings
+      else:
+        raise ValueError(f"No instruction config for task {task_name}")
+
+    print("Embeddings processed and stored.")
+    return "All embeddings processed and stored."
+
+_template = """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question. You can assume the question is about {task_name}. Chat History: {chat_history} Follow Up Input: {question} Standalone question:"""
+CONDENSE_QUESTION_PROMPT = PromptTemplate.from_template(_template)
+def retrieve_documents(query, collection_name, top_k=5):
+    """
+    Retrieve top_k documents similar to the query from the specified collection.
+    
+    :param query: The query string.
+    :param collection_name: The name of the collection in Chroma vector store.
+    :param top_k: Number of top similar documents to retrieve.
+    :return: A list of top_k similar documents.
+    """
+    # Generate embedding for the query
+    query_embedding = generate_embeddings_of_query([query])[0]
+
+    # Retrieve similar documents
+    chroma_client = chromadb.Client()
+    collection = chroma_client.get_collection(collection_name)
+    similar_docs = collection.query(query_embedding, n_results=top_k)
+
+    return similar_docs
+
+def get_chain(collection_name):
+    llm = OpenAI(temperature=0, api_key=openai_api_key)
+    retriever = ChromaRetriever(collection_name)
+    condense_question_prompt = PromptTemplate.from_template(_template)
+    qa_chain = ConversationalRetrievalChain.from_llm(
+        llm=llm, 
+        retriever=retriever, 
+        condense_question_prompt=condense_question_prompt
+    )
+    return qa_chain
+
+class ChatWrapper:
+    def __init__(self):
+        self.lock = Lock()
+
+    def __call__(self, query: str):
+        self.lock.acquire()
+        try:
+            collection_name = "document_embeddings"
+            chain = get_chain(collection_name)
+            output = chain({"question": query, "chat_history": []})["answer"]
+        except Exception as e:
+            output = str(e)
+        finally:
+            self.lock.release()
+        return output
+
+chat = ChatWrapper()
