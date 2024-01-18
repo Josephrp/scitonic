@@ -24,15 +24,15 @@
         "api_version": "2023-06-01-preview"
     },
     {
-        "model": "gemini-pro",
-        "api_key": "your Google's GenAI Key goes here",
-        "base_url": "https://genai.google.com/v1",
-        "api_type": "google"
-    },
-    {
-        "model": "gemini-pro-vision",
-        "api_key": "your Google's GenAI Key goes here",
-        "base_url": "https://genai.google.com/v1",
-        "api_type": "google"
+        "model": "e5",
+        "api_key": "NULL",
+        "base_url": "https://tonic-e5.hf.space/--replicas/7o447/",
+        "api_type": "openai"
     }
+    //,{
+    //     "model": "gemini-pro-vision",
+    //     "api_key": "your Google's GenAI Key goes here",
+    //     "base_url": "https://genai.google.com/v1",
+    //     "api_type": "google"
+    // }
 ]

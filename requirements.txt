@@ -1,4 +1,9 @@
 streamlit
+gradio
 autogen
-openai
+qdrant-client
 semantic-kernel
+llama-index
+llama-hub
+langchain
+openai
