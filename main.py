@@ -1,4 +1,5 @@
 import autogen
+from .src.mapper.e5map import E5Mapper
 
 e5demo = "7o447"
 
@@ -24,6 +25,10 @@ e5retrieve_config_list = [
     }
 ]
 
+### e5 mapper 
+
+    mapper = E5Mapper(api_key)
+    response = mapper.get_completion(user_input)
 
 # 1. create an RetrieveAssistantAgent instance named "assistant"
 assistant = RetrieveAssistantAgent(
