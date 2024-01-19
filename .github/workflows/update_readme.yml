@@ -1,0 +1,34 @@
+name: Update README
+
+on:
+  push:
+    paths:
+      - '.src/documentation/PROJECT.md'
+      - '.src/documentation/CODE_OF_CONDUCT.md'
+      - '.src/documentation/CONTRIBUTING.md'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Combine markdown files
+      run: |
+        cat .src/documentation/PROJECT.md > README.md
+        echo -e "\n\n" >> README.md
+        cat .src/documentation/INSTALL.md > README.md
+        echo -e "\n\n" >> README.md
+        cat .src/documentation/CODE_OF_CONDUCT.md >> README.md
+        echo -e "\n\n" >> README.md
+        cat .src/documentation/CONTRIBUTING.md >> README.md
+
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git add README.md
+        git commit -m "Update README" || exit 0
+        git push
