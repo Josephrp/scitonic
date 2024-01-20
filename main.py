@@ -1,6 +1,7 @@
 import autogen
 from .src.mapper.e5map import E5Mapper
 from .src.mapper.scimap import scimap
+from src.mapper.parser import MapperParser
 
 
 e5demo = "7o447"
@@ -27,15 +28,14 @@ e5retrieve_config_list = [
     }
 ]
 
-### e5 mapper 
-
+### Tonic User Intention Mapping and e5 embedding selection
+   
     taskmapper = E5Mapper(api_key)
     taskmap = taskmapper.get_completion(user_input)
-
-### Autogen Team Mapper 
-
     teammapper = scimap(api_key)
     teammap = teammapper.get_completion(user_input)
+    task = MapperParser.parse_taskmapper_response(taskmapper_response)
+    team = MapperParser.parse_teammapper_response(teammapper_response)
 
 # 1. create an RetrieveAssistantAgent instance named "assistant"
 assistant = RetrieveAssistantAgent(
