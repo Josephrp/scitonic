@@ -1,112 +1,96 @@
 import autogen
-from .src.mapper.e5map import E5Mapper
-from .src.mapper.scimap import scimap
+from src.mapper.e5map import E5Mapper
+from src.mapper.scimap import scimap
 from src.mapper.parser import MapperParser
-from src.memory.imvectorstore import Chroma
+from src.datatonic.dataloader import DataLoader
 from src.teams.agentteam import codingteam, covid19team, financeteam, debateteam, homeworkteam, consultingteam
 
-# Example usage
-# codingteam()
-# covid19team()
-# agents_factory = AgentsFactory()
+api_key = "OAI_KEY"
 
-# e5demo = "7o447"
-
-def VectorStore():
-    # Create an instance of Chroma
-    chroma_db = Chroma()
-
-    # Create a new collection
-    collection_name = "my_collection"
-    chroma_db.new_collection(collection_name)
-
-    # Switch to the new collection
-    chroma_db.switch_collection(collection_name)
-
-    # Example data to add
-    data = {
-        "embeddings": [...],  # Replace with actual embeddings
-        "contents": [...],    # Replace with actual document contents
-        "metadatas": [...],   # Replace with actual metadata
-        "ids": [...]          # Replace with actual IDs
-    }
-
-    # Add data to the collection
-    chroma_db.add_data_to(data)
-
-    # Add more operations as needed...
-
-
+# Load config
 llm_config = autogen.config_list_from_json(
     env_or_file="./config/OAI_CONFIG_LIST.json",
     filter_dict={"model": {"gpt-4", "gpt-3.5-turbo-16k", "gpt-4-1106-preview"}}
 )
 
-# for e5 config we should consider building a complete retriever perhaps  
-e5embed_config_list = [
-    {
-        "model": "e5",
-        "api_key": "None",
-        "base_url": "https://tonic1-e5.hf.space/--replicas/{e5demo}/compute_embeddings", # includes 'space secret' which has to be changed every time the demo goes to sleep
-    }
-]
+# Initialize DataLoader
+data_loader = DataLoader()
 
-e5retrieve_config_list = [
-    {
-        "model": "e5",
-        "api_key": "None",
-        "base_url": "https://tonic1-e5.hf.space/--replicas/{e5demo}/", # includes 'space secret' which has to be changed every time the demo goes to sleep
-    }
-]
+# UserProxy for interaction
+class UserProxy:
+    def interact(self):
+        question = input("Describe your problem in detail: ")
+        max_auto_reply = int(input("Set a maximum number of autoreplies (minimum 50): "))
+        return question, max_auto_reply
 
-### Tonic User Intention Mapping and e5 embedding selection
-   
+# Main function
+def main():
+    user_proxy = UserProxy()
+    question, max_auto_reply = user_proxy.interact()
+
+    # Initialize mappers
     taskmapper = E5Mapper(api_key)
-    taskmap = taskmapper.get_completion(user_input)
     teammapper = scimap(api_key)
-    teammap = teammapper.get_completion(user_input)
-    task = MapperParser.parse_taskmapper_response(taskmapper_response)
-    team = MapperParser.parse_teammapper_response(teammapper_response)
 
-# 1. create an RetrieveAssistantAgent instance named "assistant"
-assistant = RetrieveAssistantAgent(
-    name="assistant",
-    system_message="You are a helpful assistant.",
-    llm_config={
-        "timeout": 600,
-        "cache_seed": 42,
-        "config_list": config_list,
-    },
-)
+    # Get responses from mappers
+    taskmap_response = taskmapper.get_completion(question)
+    teammap_response = teammapper.get_completion(question)
 
-# 2. create the QdrantRetrieveUserProxyAgent instance named "ragproxyagent"
-# By default, the human_input_mode is "ALWAYS", which means the agent will ask for human input at every step. We set it to "NEVER" here.
-# `docs_path` is the path to the docs directory. It can also be the path to a single file, or the url to a single file. By default,
-# it is set to None, which works only if the collection is already created.
-#
-# `task` indicates the kind of task we're working on. In this example, it's a `code` task.
-# `chunk_token_size` is the chunk token size for the retrieve chat. By default, it is set to `max_tokens * 0.6`, here we set it to 2000.
-# We use an in-memory QdrantClient instance here. Not recommended for production.
-# Get the installation instructions here: https://qdrant.tech/documentation/guides/installation/
-#ragproxyagent = QdrantRetrieveUserProxyAgent(
-#    name="ragproxyagent",
-#    human_input_mode="NEVER",
-#    max_consecutive_auto_reply=10,
-#    retrieve_config={
-#        "task": "code",
-#        "docs_path": "add_your_files_here",
-#       "chunk_token_size": 2000,
-#       "model": config_list[0]["model"],
-#       "client": QdrantClient(":memory:"),             CONNECTOR REQUIRED !!
-#       "embedding_model": "BAAI/bge-small-en-v1.5",
-#    },
-#)
+    # Parse responses
+    task = MapperParser.parse_taskmapper_response(taskmap_response)
+    team = MapperParser.parse_teammapper_response(teammap_response)
 
-# assistant.reset()
-# ragproxyagent.initiate_chat(assistant, problem="What is autogen?")
+    # Load dataset based on task
+    dataset = data_loader.load_and_process(task.lower())
 
-# from datasets import load_dataset
-# from transformers import AutoTokenizer, AutoModel
+    # Select and initiate team based on team mapping
+    if team == "CodingTeam":
+        codingteam()
+    elif team == "Covid19Team":
+        covid19team()
+    elif team == "FinanceTeam":
+        financeteam()
+    elif team == "DebateTeam":
+        debateteam()
+    elif team == "HomeworkTeam":
+        homeworkteam()
+    elif team == "ConsultingTeam":
+        consultingteam()
+    else:
+        print("No appropriate team found for the given input.")
+
+    # Further processing can be done here with the dataset and the selected team
+
+if __name__ == "__main__":
+    main()
+
+
+# # 1. create an RetrieveAssistantAgent instance named "assistant"
+# assistant = RetrieveAssistantAgent(
+#     name="assistant",
+#     system_message="You are a helpful assistant.",
+#     llm_config={
+#         "timeout": 600,
+#         "cache_seed": 42,
+#         "config_list": config_list,
+#     },
+# )
+# def VectorStore():
+#     chroma_db = Chroma()
+#     collection_name = "my_collection"
+#     chroma_db.new_collection(collection_name)
+#     chroma_db.switch_collection(collection_name)
+#     data = {
+#         "embeddings": [...],  # Replace with actual embeddings
+#         "contents": [...],    # Replace with actual document contents
+#         "metadatas": [...],   # Replace with actual metadata
+#         "ids": [...]          # Replace with actual IDs
+#     }
+#     chroma_db.add_data_to(data)
+
+#     # Add more operations as needed...
+
+# # from transformers import AutoTokenizer, AutoModel
 # import torch
 # from src.memory.imvectorstore import Chroma
 
@@ -162,11 +146,20 @@ assistant = RetrieveAssistantAgent(
 #     collection_name = "my_ag_news_collection"
 #     load_and_store_dataset(dataset_name, model_name, collection_name)
 
-class UserProxy:
-    def interact(self):
-        question = input("Sci-Tonic builds multi-agent systems that automate your technical research operations ! Describe your problem in detail, then optionally bullet point a brief step by step way to solve it, then (or optionally) give a clear command or instruction to solve the issues above:")
-        max_auto_reply = int(input("Set a maximum number of autoreplies by entering a number with minimum 50: "))
-        return question, max_auto_reply
 
-if __name__ == "__main__":
-    print("Response:", response)
+# # for e5 config we should consider building a complete retriever perhaps  
+# e5embed_config_list = [
+#     {
+#         "model": "e5",
+#         "api_key": "None",
+#         "base_url": "https://tonic1-e5.hf.space/--replicas/{e5demo}/compute_embeddings", # includes 'space secret' which has to be changed every time the demo goes to sleep
+#     }
+# ]
+
+# e5retrieve_config_list = [
+#     {
+#         "model": "e5",
+#         "api_key": "None",
+#         "base_url": "https://tonic1-e5.hf.space/--replicas/{e5demo}/", # includes 'space secret' which has to be changed every time the demo goes to sleep
+#     }
+# ]
