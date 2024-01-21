@@ -1,9 +1,12 @@
 import autogen
 from ..agentics.agents import AgentsFactory
 
+<<<<<<< Updated upstream
 
 agents_factory = AgentsFactory()
 
+=======
+>>>>>>> Stashed changes
 # Function to reset agents
 def _reset_agents():
     boss_aid.reset()
