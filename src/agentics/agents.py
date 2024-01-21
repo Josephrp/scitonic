@@ -8,14 +8,7 @@ from autogen import AssistantAgent
 from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
 import chromadb
 
-class AgentsFactory:
-    def __init__(self):
-        self.llm_config = self._get_llm_config()
-
-
-    def termination_msg(self, x):
-        return isinstance(x, dict) and "TERMINATE" == str(x.get("content", ""))[-9:].upper()
-   config_list = autogen.config_list_from_json(
+config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     file_location=".src/config/",
     filter_dict={
@@ -25,12 +18,25 @@ class AgentsFactory:
 
 print("LLM models: ", [config_list[i]["model"] for i in range(len(config_list))])
 
-     llm_config = {
+llm_config = {
          "timeout": 60,
          "cache_seed": 42,
          "config_list": config_list,
          "temperature": 0,
      }
+
+class AgentsFactory:
+    def __init__(self):
+        self.llm_config = self._get_llm_config()
+
+
+    def termination_msg(self, x):
+        return isinstance(x, dict) and "TERMINATE" == str(x.get("content", ""))[-9:].upper()
+
+
+
+
+
     def tonic(self) :
         return autogen.UserProxyAgent(
             name="Boss",
@@ -91,7 +97,7 @@ print("LLM models: ", [config_list[i]["model"] for i in range(len(config_list))]
         )
 
     def debate_champion(self) :
-    return AssistantAgent(
+        return AssistantAgent(
             name="Debate_Champion",
             system_message="You are a debate champion. Contribute to meaningful debates.",
             llm_config=llm_config
@@ -104,41 +110,41 @@ print("LLM models: ", [config_list[i]["model"] for i in range(len(config_list))]
         llm_config=llm_config
     )
 
-    consulting_pro(self) :
-        return AssistantAgent(
+    def consulting_pro(self) :
+            return AssistantAgent(
             name="Consulting_Pro",
             system_message="You are a consulting professional. Offer professional advice and solutions.",
             llm_config=llm_config
         )
-    covid19_scientist : 
+    def covid19_scientist(self) : 
         return AssistantAgent(
             name="Covid19_Scientist",
             system_message="You are a scientist studying Covid-19 trends. Provide analysis and insights.",
             llm_config=llm_config
         )
 
-    healthcare_expert : 
+    def healthcare_expert(self) : 
         return AssistantAgent(
             name="Healthcare_Expert",
             system_message="You are a healthcare expert focused on managing and mitigating the impact of Covid-19.",
             llm_config=llm_config
         )
 
-    finance_analyst(self) :
+    def finance_analyst(self) :
         return AssistantAgent(
             name="Finance_Analyst",
             system_message="You are a finance analyst. Provide insights on the economic impact of Covid-19.",
             llm_config=llm_config
         )
 
-    debate_expert(self) :
+    def debate_expert(self) :
         return AssistantAgent(
             name="Debate_Expert",
             system_message="You are an expert in debate strategies and communication. Participate in meaningful debates.",
             llm_config=llm_config
         )
 
-    academic_expert :
+    def academic_expert(self) :
         return AssistantAgent(
             name="Academic_Expert",
             system_message="You are an academic expert. Provide assistance and insights for academic challenges.",
