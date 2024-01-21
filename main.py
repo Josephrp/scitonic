@@ -42,6 +42,16 @@ def main():
 
     # Load dataset based on task
     dataset = data_loader.load_and_process(task.lower())
+ 
+    # Save dataset to a JSON file and get the file path
+    json_file_path = "./src/datatonic"  # Define the JSON file path
+    data_loader.save_to_json(dataset, json_file_path)
+
+    # Initialize AgentsFactory with the path to the JSON file
+    agents_factory = AgentsFactory(llm_config, json_file_path)
+
+    # Retrieve the Boss Assistant agent
+    boss_assistant = agents_factory.scitonic()
 
     # Select and initiate team based on team mapping
     if team == "CodingTeam":
@@ -59,7 +69,6 @@ def main():
     else:
         print("No appropriate team found for the given input.")
 
-    # Further processing can be done here with the dataset and the selected team
 
 if __name__ == "__main__":
     main()
