@@ -15,20 +15,22 @@ class AgentsFactory:
 
     def termination_msg(self, x):
         return isinstance(x, dict) and "TERMINATE" == str(x.get("content", ""))[-9:].upper()
-    # config_list = [
-    #     {
-    #         "model": "gpt-4",
-    #         "api_key": "<your OpenAI API key>",
-    #     },  # OpenAI API endpoint for gpt-4
-    # ]
+   config_list = autogen.config_list_from_json(
+    "OAI_CONFIG_LIST",
+    file_location=".src/config/",
+    filter_dict={
+        "model": ["gpt-3.5-turbo", "gpt-35-turbo", "gpt-35-turbo-0613", "gpt-4", "gpt4", "gpt-4-32k"],
+    },
+)
 
+print("LLM models: ", [config_list[i]["model"] for i in range(len(config_list))])
 
-    # llm_config = {
-    #     "timeout": 60,
-    #     "cache_seed": 42,
-    #     "config_list": config_list,
-    #     "temperature": 0,
-    # }
+     llm_config = {
+         "timeout": 60,
+         "cache_seed": 42,
+         "config_list": config_list,
+         "temperature": 0,
+     }
     def tonic(self) :
         return autogen.UserProxyAgent(
             name="Boss",
