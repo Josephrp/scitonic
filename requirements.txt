@@ -1,7 +1,7 @@
 streamlit
 gradio
 autogen
-qdrant-client
+chromadb
 semantic-kernel
 llama-index
 llama-hub
