@@ -3,11 +3,6 @@ from autogen import AssistantAgent
 from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
 import chromadb
 
-import autogen
-from autogen import AssistantAgent
-from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
-import chromadb
-
 config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     file_location=".src/config/",
@@ -26,16 +21,12 @@ llm_config = {
      }
 
 class AgentsFactory:
-    def __init__(self):
-        self.llm_config = self._get_llm_config()
-
+    def __init__(self, llm_config, db_path):
+        self.llm_config = llm_config
+        self.db_path = db_path
 
     def termination_msg(self, x):
         return isinstance(x, dict) and "TERMINATE" == str(x.get("content", ""))[-9:].upper()
-
-
-
-
 
     def tonic(self) :
         return autogen.UserProxyAgent(
@@ -57,7 +48,7 @@ class AgentsFactory:
             max_consecutive_auto_reply=3,
             retrieve_config={
                 "task": "QuoraRetrieval",
-                "docs_path": "",
+                "docs_path": self.db_path,  ,
                 "chunk_token_size": 1000,
                 "model": llm_config["config_list"][0]["model"],
                 "client": chromadb.PersistentClient(path="/tmp/chromadb"),
