@@ -1,9 +1,11 @@
 streamlit
 gradio
+datasets
 autogen
 chromadb
 semantic-kernel
 llama-index
 llama-hub
 langchain
+huggingface_hub
 openai
