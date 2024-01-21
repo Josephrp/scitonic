@@ -36,7 +36,7 @@ boss_aid = RetrieveUserProxyAgent(
     human_input_mode="NEVER",
     max_consecutive_auto_reply=3,
     retrieve_config={
-        "task": "code",
+        "task": "QuoraRetrieval",
         "docs_path": "",
         "chunk_token_size": 1000,
         "model": llm_config["config_list"][0]["model"],
