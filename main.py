@@ -5,7 +5,10 @@ from src.mapper.parser import MapperParser
 from src.memory.imvectorstore import Chroma
 from src.teams.agentteam import codingteam, covid19team, financeteam, debateteam, homeworkteam, consultingteam
 
-
+# Example usage
+# codingteam()
+# covid19team()
+# agents_factory = AgentsFactory()
 
 # e5demo = "7o447"
 
