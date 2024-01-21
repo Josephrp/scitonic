@@ -3,6 +3,7 @@ from .src.mapper.e5map import E5Mapper
 from .src.mapper.scimap import scimap
 from src.mapper.parser import MapperParser
 from src.memory.imvectorstore import Chroma
+from src.teams.agentteam import codingteam, covid19team, financeteam, debateteam, homeworkteam, consultingteam
 
 
 

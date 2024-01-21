@@ -1,12 +1,19 @@
+import autogen
+from ..agentics.agents import AgentsFactory
+
+
+agents_factory = AgentsFactory()
+
 # Function to reset agents
 def _reset_agents():
     boss_aid.reset()
+
 
 # Define functions for each team
 def codingteam():
     _reset_agents()
     team = autogen.GroupChat(
-        agents=[boss_aid, coder, pm, reviewer],
+        agents=[scitonic, coder, pm, reviewer],
         messages=[],
         max_round=12,
         speaker_selection_method="round_robin"
@@ -18,7 +25,7 @@ def codingteam():
 def covid19team():
     _reset_agents()
     team = autogen.GroupChat(
-        agents=[boss_aid, covid19_scientist, healthcare_expert, finance_analyst],
+        agents=[scitonic, covid19_scientist, healthcare_expert, finance_analyst],
         messages=[],
         max_round=12
     )
@@ -29,7 +36,7 @@ def covid19team():
 def financeteam():
     _reset_agents()
     team = autogen.GroupChat(
-        agents=[boss_aid, finance_analyst, pm, reviewer, finance_expert],
+        agents=[scitonic, finance_analyst, pm, reviewer, finance_expert],
         messages=[],
         max_round=12,
         speaker_selection_method="round_robin"
@@ -41,7 +48,7 @@ def financeteam():
 def debateteam():
     _reset_agents()
     team = autogen.GroupChat(
-        agents=[boss_aid, debate_expert, pm, reviewer, debate_champion],
+        agents=[scitonic, debate_expert, pm, reviewer, debate_champion],
         messages=[],
         max_round=12,
         speaker_selection_method="round_robin"
@@ -53,7 +60,7 @@ def debateteam():
 def homeworkteam():
     _reset_agents()
     team = autogen.GroupChat(
-        agents=[boss_aid, academic_expert, pm, reviewer, academic_whiz],
+        agents=[scitonic, academic_expert, pm, reviewer, academic_whiz],
         messages=[],
         max_round=12,
         speaker_selection_method="round_robin"
@@ -65,7 +72,7 @@ def homeworkteam():
 def consultingteam():
     _reset_agents()
     team = autogen.GroupChat(
-        agents=[boss_aid, consultant, pm, reviewer, consulting_pro],
+        agents=[scitonic, consultant, pm, reviewer, consulting_pro],
         messages=[],
         max_round=12,
         speaker_selection_method="round_robin"
