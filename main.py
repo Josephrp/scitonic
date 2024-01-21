@@ -100,6 +100,64 @@ assistant = RetrieveAssistantAgent(
 
 # assistant.reset()
 # ragproxyagent.initiate_chat(assistant, problem="What is autogen?")
+
+# from datasets import load_dataset
+# from transformers import AutoTokenizer, AutoModel
+# import torch
+# from src.memory.imvectorstore import Chroma
+
+# def encode_texts(model_name, texts):
+#     tokenizer = AutoTokenizer.from_pretrained(model_name)
+#     model = AutoModel.from_pretrained(model_name)
+
+#     # Encoding texts
+#     encoded_input = tokenizer(texts, padding=True, truncation=True, return_tensors='pt')
+#     with torch.no_grad():
+#         model_output = model(**encoded_input)
+
+#     # Mean pooling - Take attention mask into account for correct averaging
+#     input_mask_expanded = encoded_input['attention_mask'].unsqueeze(-1).expand(model_output.last_hidden_state.size()).float()
+#     sum_embeddings = torch.sum(model_output.last_hidden_state * input_mask_expanded, 1)
+#     sum_mask = torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+#     return sum_embeddings / sum_mask
+
+# def load_and_store_dataset(dataset_name, model_name, collection_name):
+#     # Load dataset
+#     dataset = load_dataset(dataset_name, split='train')
+
+#     # Select a subset for demonstration purposes
+#     subset = dataset.select(range(100))
+
+#     # Extract texts and IDs
+#     texts = subset['text']  # Adjust field name based on dataset structure
+#     ids = subset['id']  # Adjust field name based on dataset structure
+
+#     # Encode texts
+#     embeddings = encode_texts(model_name, texts)
+
+#     # Create an instance of Chroma and a new collection
+#     chroma_db = Chroma()
+#     chroma_db.new_collection(collection_name)
+#     chroma_db.switch_collection(collection_name)
+
+#     # Prepare data for storage
+#     data = {
+#         "embeddings": embeddings.tolist(),
+#         "contents": texts,
+#         "metadatas": [{} for _ in texts],  # Empty metadata for demonstration
+#         "ids": ids
+#     }
+
+#     # Add data to the collection
+#     chroma_db.add_data_to(data)
+
+# # Example usage
+# if __name__ == "__main__":
+#     dataset_name = "ag_news"  # Example dataset
+#     model_name = "distilbert-base-uncased"  # Example model
+#     collection_name = "my_ag_news_collection"
+#     load_and_store_dataset(dataset_name, model_name, collection_name)
+
 class UserProxy:
     def interact(self):
         question = input("Sci-Tonic builds multi-agent systems that automate your technical research operations ! Describe your problem in detail, then optionally bullet point a brief step by step way to solve it, then (or optionally) give a clear command or instruction to solve the issues above:")
