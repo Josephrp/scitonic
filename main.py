@@ -2,9 +2,36 @@ import autogen
 from .src.mapper.e5map import E5Mapper
 from .src.mapper.scimap import scimap
 from src.mapper.parser import MapperParser
+from src.memory.imvectorstore import Chroma
 
 
-e5demo = "7o447"
+
+# e5demo = "7o447"
+
+def VectorStore():
+    # Create an instance of Chroma
+    chroma_db = Chroma()
+
+    # Create a new collection
+    collection_name = "my_collection"
+    chroma_db.new_collection(collection_name)
+
+    # Switch to the new collection
+    chroma_db.switch_collection(collection_name)
+
+    # Example data to add
+    data = {
+        "embeddings": [...],  # Replace with actual embeddings
+        "contents": [...],    # Replace with actual document contents
+        "metadatas": [...],   # Replace with actual metadata
+        "ids": [...]          # Replace with actual IDs
+    }
+
+    # Add data to the collection
+    chroma_db.add_data_to(data)
+
+    # Add more operations as needed...
+
 
 llm_config = autogen.config_list_from_json(
     env_or_file="./config/OAI_CONFIG_LIST.json",
