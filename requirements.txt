@@ -9,3 +9,4 @@ llama-hub
 langchain
 huggingface_hub
 openai
+pyautogen
