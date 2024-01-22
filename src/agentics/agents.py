@@ -48,7 +48,7 @@ class AgentsFactory:
             max_consecutive_auto_reply=3,
             retrieve_config={
                 "task": "QuoraRetrieval",
-                "docs_path": self.db_path,  ,
+                "docs_path": self.db_path,
                 "chunk_token_size": 1000,
                 "model": llm_config["config_list"][0]["model"],
                 "client": chromadb.PersistentClient(path="/tmp/chromadb"),
