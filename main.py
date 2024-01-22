@@ -7,6 +7,7 @@ from src.mapper.scimap import scimap
 from src.mapper.parser import MapperParser
 from src.datatonic.dataloader import DataLoader
 from src.teams.agentteam import codingteam, covid19team, financeteam, debateteam, homeworkteam, consultingteam
+from src.agentics.agents import AgentsFactory
 
 title = """# Welcome to 👩🏻‍🔬🧪SciTonic
 this is a highly adaptive technical operator that will listen to your query and load datasets and multi-agent teams based on those. Simply describe your problem in detail, ask a question and provide a reasoning method to get started:
@@ -89,7 +90,8 @@ def process_query(oai_key, query, max_auto_reply):
     dataset = data_loader.load_and_process(task.lower())
 
     # Save dataset to a JSON file and get the file path
-    json_file_path = "./src/datatonic"  # Define the JSON file path
+    json_file_name = "dataset.json"  # Provide a suitable file name
+    json_file_path = os.path.join("./src/datatonic/", json_file_name)  # Define the complete file path
     data_loader.save_to_json(dataset, json_file_path)
 
     # Initialize AgentsFactory with the path to the JSON file

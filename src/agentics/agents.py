@@ -1,13 +1,15 @@
 import autogen
-from autogen.autogen.agentchat.assistant_agent import AssistantAgent
-from autogen.autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
+from autogen.oai.client import OpenAIWrapper
+from autogen.agentchat.assistant_agent import AssistantAgent
+from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
+from autogen.agentchat.conversable_agent import ConversableAgent
 import chromadb
 
 config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST.json",
     file_location="./src/config/",
     filter_dict={
-        "model": ["gpt-3.5-turbo", "gpt-35-turbo", "gpt-35-turbo-0613", "gpt-4", "gpt4", "gpt-4-32k"],
+        "model": ["gpt-3.5-turbo-preview", "gpt-4-preview", "gpt-4-vision-preview", "dall-e-3"],
     },
 )
 
