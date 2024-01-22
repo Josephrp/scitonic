@@ -1,6 +1,6 @@
 import autogen
-from autogen import AssistantAgent
-from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
+from autogen.autogen.agentchat.assistant_agent import AssistantAgent
+from autogen.autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
 import chromadb
 
 config_list = autogen.config_list_from_json(
