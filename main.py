@@ -22,6 +22,47 @@ def update_config_file(api_key):
     with open(config_path, "w") as file:
         json.dump(config, file, indent=4)
 
+
+def process_audio_image_input(input_type, input_data, MODEL_ID):
+    PAT = os.getenv("CLARIFAI_PAT")
+    if not PAT:
+        raise ValueError("Clarifai Personal Access Token not set in environment variables")
+
+    channel = ClarifaiChannel.get_grpc_channel()
+    stub = service_pb2_grpc.V2Stub(channel)
+    metadata = (("authorization", "Key " + PAT),)
+
+    if input_type == "audio":
+        file_bytes = input_data
+    elif input_type == "image":
+        file_bytes = base64.b64encode(input_data).decode("utf-8")
+
+    post_model_outputs_response = stub.PostModelOutputs(
+        service_pb2.PostModelOutputsRequest(
+            model_id=MODEL_ID,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(
+                        audio=resources_pb2.Audio(base64=file_bytes) if input_type == "audio" else None,
+                        image=resources_pb2.Image(base64=file_bytes) if input_type == "image" else None
+                    )
+                )
+            ],
+        ),
+        metadata=metadata,
+    )
+
+    if post_model_outputs_response.status.code != status_code_pb2.SUCCESS:
+        print(post_model_outputs_response.status)
+        raise Exception(
+            "Post model outputs failed, status: "
+            + post_model_outputs_response.status.description
+        )
+
+    output = post_model_outputs_response.outputs[0]
+    return output.data.text.raw
+
+
 def process_query(oai_key, query, max_auto_reply):
     update_config_file(oai_key)
     os.environ['OAI_KEY'] = oai_key
@@ -74,14 +115,27 @@ def main():
         gr.Markdown(title)
         with gr.Row():
             txt_oai_key = gr.Textbox(label="OpenAI API Key", type="password")
+            txt_pat = gr.Textbox(label="Clarifai PAT", type="password", placeholder="Enter Clarifai PAT here")
             txt_query = gr.Textbox(label="Describe your problem in detail:")
             txt_max_auto_reply = gr.Number(label="Max Auto Replies", value=50)
+            audio_input = gr.Audio(label="Or speak your problem here:", type="numpy", optional=True)
+            image_input = gr.Image(label="Or upload an image related to your problem:", type="numpy", optional=True)
         btn_submit = gr.Button("Submit")
         output = gr.Textbox(label="Output", readonly=True)
 
+        def process_and_submit(oai_key, pat, query, max_auto_reply, audio, image):
+            os.environ['CLARIFAI_PAT'] = pat
+            os.environ['OAI_KEY'] = oai_key
+
+            if audio is not None:
+                query = process_audio_image_input("audio", audio, "asr-wav2vec2-base-960h-english")
+            elif image is not None:
+                query = process_audio_image_input("image", image, "general-english-image-caption-blip")
+            return process_query(oai_key, query, max_auto_reply)
+
         btn_submit.click(
-            process_query,
-            inputs=[txt_oai_key, txt_query, txt_max_auto_reply],
+            process_and_submit,
+            inputs=[txt_oai_key, txt_pat, txt_query, txt_max_auto_reply, audio_input, image_input],
             outputs=output
         )
 
