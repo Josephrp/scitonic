@@ -118,10 +118,10 @@ def main():
             txt_pat = gr.Textbox(label="Clarifai PAT", type="password", placeholder="Enter Clarifai PAT here")
             txt_query = gr.Textbox(label="Describe your problem in detail:")
             txt_max_auto_reply = gr.Number(label="Max Auto Replies", value=50)
-            audio_input = gr.Audio(label="Or speak your problem here:", type="numpy", optional=True)
-            image_input = gr.Image(label="Or upload an image related to your problem:", type="numpy", optional=True)
+            audio_input = gr.Audio(label="Or speak your problem here:", type="numpy",)
+            image_input = gr.Image(label="Or upload an image related to your problem:", type="numpy", )
         btn_submit = gr.Button("Submit")
-        output = gr.Textbox(label="Output", readonly=True)
+        output = gr.Textbox(label="Output",)
 
         def process_and_submit(oai_key, pat, query, max_auto_reply, audio, image):
             os.environ['CLARIFAI_PAT'] = pat

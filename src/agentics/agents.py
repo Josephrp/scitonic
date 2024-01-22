@@ -4,8 +4,8 @@ from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProx
 import chromadb
 
 config_list = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    file_location=".src/config/",
+    "OAI_CONFIG_LIST.json",
+    file_location="./src/config/",
     filter_dict={
         "model": ["gpt-3.5-turbo", "gpt-35-turbo", "gpt-35-turbo-0613", "gpt-4", "gpt4", "gpt-4-32k"],
     },
@@ -20,13 +20,15 @@ llm_config = {
          "temperature": 0,
      }
 
+def termination_msg(self, x):
+        return isinstance(x, dict) and "TERMINATE" == str(x.get("content", ""))[-9:].upper()
+
 class AgentsFactory:
     def __init__(self, llm_config, db_path):
         self.llm_config = llm_config
         self.db_path = db_path
 
-    def termination_msg(self, x):
-        return isinstance(x, dict) and "TERMINATE" == str(x.get("content", ""))[-9:].upper()
+    
 
     def tonic(self) :
         return autogen.UserProxyAgent(

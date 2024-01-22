@@ -9,3 +9,6 @@ llama-hub
 langchain
 huggingface_hub
 openai
+Ipython
+pyautogen
+pypdf
