@@ -1,11 +1,11 @@
 import autogen
-from ..agentics.agents import AgentsFactory
+from src.agentics.agents import AgentsFactory
 
 # agents_factory = AgentsFactory()
 
 # Function to reset agents
 def _reset_agents():
-    boss_aid.reset()
+    scitonic.reset()
 
 
 # Define functions for each team
@@ -19,7 +19,7 @@ def codingteam():
     )
 
     manager = autogen.GroupChatManager(groupchat=team, llm_config=llm_config)
-    boss_aid.initiate_chat(manager, problem=PROBLEM, n_results=3)
+    scitonic.initiate_chat(manager, problem=PROBLEM, n_results=3)
 
 def covid19team():
     _reset_agents()
@@ -30,7 +30,7 @@ def covid19team():
     )
 
     manager = autogen.GroupChatManager(groupchat=team, llm_config=llm_config)
-    boss_aid.initiate_chat(manager, covid19_problem=COVID19_PROBLEM, n_results=3)
+    scitonic.initiate_chat(manager, covid19_problem=COVID19_PROBLEM, n_results=3)
 
 def financeteam():
     _reset_agents()
@@ -42,7 +42,7 @@ def financeteam():
     )
 
     manager = autogen.GroupChatManager(groupchat=team, llm_config=llm_config)
-    boss_aid.initiate_chat(manager, finance_problem=FINANCE_PROBLEM, n_results=3)
+    scitonic.initiate_chat(manager, finance_problem=FINANCE_PROBLEM, n_results=3)
 
 def debateteam():
     _reset_agents()
@@ -54,7 +54,7 @@ def debateteam():
     )
 
     manager = autogen.GroupChatManager(groupchat=team, llm_config=llm_config)
-    boss_aid.initiate_chat(manager, debate_problem=DEBATE_PROBLEM, n_results=3)
+    scitonic.initiate_chat(manager, debate_problem=DEBATE_PROBLEM, n_results=3)
 
 def homeworkteam():
     _reset_agents()
@@ -66,7 +66,7 @@ def homeworkteam():
     )
 
     manager = autogen.GroupChatManager(groupchat=team, llm_config=llm_config)
-    boss_aid.initiate_chat(manager, homework_problem=HOMEWORK_PROBLEM, n_results=3)
+    scitonic.initiate_chat(manager, homework_problem=HOMEWORK_PROBLEM, n_results=3)
 
 def consultingteam():
     _reset_agents()
@@ -78,4 +78,4 @@ def consultingteam():
     )
 
     manager = autogen.GroupChatManager(groupchat=team, llm_config=llm_config)
-    boss_aid.initiate_chat(manager, consulting_problem=CONSULTING_PROBLEM, n_results=3)
+    scitonic.initiate_chat(manager, consulting_problem=CONSULTING_PROBLEM, n_results=3)
