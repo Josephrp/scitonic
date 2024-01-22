@@ -1,6 +1,7 @@
 import os
 import gradio as gr
 import autogen
+import json
 from src.mapper.e5map import E5Mapper
 from src.mapper.scimap import scimap
 from src.mapper.parser import MapperParser
@@ -12,7 +13,7 @@ this is a highly adaptive technical operator that will listen to your query and 
 """
 
 def update_config_file(api_key):
-    config_path = "./config/OAI_CONFIG_LIST.json"
+    config_path = "./src/config/OAI_CONFIG_LIST.json"
     with open(config_path, "r") as file:
         config = json.load(file)
 
@@ -67,7 +68,7 @@ def process_query(oai_key, query, max_auto_reply):
     update_config_file(oai_key)
     os.environ['OAI_KEY'] = oai_key
     llm_config = autogen.config_list_from_json(
-        env_or_file="./config/OAI_CONFIG_LIST.json",
+        env_or_file="./src/config/OAI_CONFIG_LIST.json",
         filter_dict={"model": {"gpt-4", "gpt-3.5-turbo-16k", "gpt-4-1106-preview"}}
     )
 

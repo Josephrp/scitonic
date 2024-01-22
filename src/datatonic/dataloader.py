@@ -89,7 +89,10 @@ class DataLoader:
         if dataset_name in self.datasets:
             return self.datasets[dataset_name]()
         else:
-            raise ValueError(f"Dataset {dataset_name} not supported.")
+            # Log or return an error message and default to "gpl-arguana"
+            error_message = f"Dataset '{dataset_name}' not supported. Defaulting to 'gpl-arguana'."
+            print(error_message)  # or handle this message as needed
+            return self.load_gpl_arguana()  # Default to the 'gpl-arguana' dataset
 
     def save_to_json(self, data, file_name):
         with open(file_name, 'w') as f:
