@@ -1,63 +1,68 @@
 [
   {
-  "question": "What does Pando plan to use the $30 million raised in its recent Series B round for?",
-  "answer": "Pando intends to use the funds for expanding its global sales, marketing, and delivery capabilities.",
-  "reference_article": "Pando Raises $30M in Series B Funding for Fulfillment Management Technologies",
-  "reference_text": "Signaling that investments in the supply chain sector remain robust, Pando, a startup developing fulfillment management technologies, today announced that it raised $30 million in a Series B round, bringing its total raised to $45 million. Iron Pillar and Uncorrelated Ventures led the round, with participation from existing investors Nexus Venture Partners, Chiratae Ventures and Next47. CEO and founder Nitin Jayakrishnan says that the new capital will be put toward expanding Pando’s global sales, marketing and delivery capabilities."
-
+    "Question": "What are some of the new integrations and features that Slack announced to incorporate AI into its platform?",
+    "Answer": "Slack announced several new integrations and features to incorporate AI into its platform. These include SlackGPT, a generative AI built on top of the Slack platform that users and developers can tap into to build AI-driven experiences. Slack is also bringing AI natively into the user experience with features like AI-powered conversation summaries and writing assistance. Additionally, Slack will incorporate EinsteinGPT, Salesforce's generative AI, to provide insights from real-time customer data in Salesforce directly into Slack. These integrations are still in development, but developers can currently build custom integrations with a variety of large language models (LLMs).",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
   },
   {
-    "question": "What is ChatGPT, and how has it been used in various applications?",
-  "answer": "ChatGPT is a text-generating AI chatbot developed by OpenAI. It has been widely used for writing essays, code, and more based on short text prompts, enhancing productivity. Major brands have experimented with it for generating ad and marketing copy. OpenAI continually invests in ChatGPT, upgrading it to GPT-4, a more advanced language-writing model. The chatbot has been integrated into various applications, including search engines, customer service, and even an iPhone customization app called SuperChat.",
-  "reference_article": "ChatGPT: Everything you need to know about the AI-powered chatbot",
-  "reference_text": "ChatGPT, OpenAI’s text-generating AI chatbot, has taken the world by storm. It’s able to write essays, code and more given short text prompts, hyper-charging productivity. But it also has a more…nefarious side... (full article)"
-},
-  {
-  "question": "What is Checks, and how is it transitioning within Google?",
-  "answer": "Checks is an AI-powered tool developed at Google's in-house incubator Area 120 to check mobile apps for compliance with privacy rules and regulations. Originally part of Area 120, Checks is now officially moving into Google as a privacy product for mobile developers. Co-founders Fergus Hurley and Nia Castelly will hold the titles of GM and Legal Lead, respectively, for Checks under Google. The tool utilizes artificial intelligence and machine learning to scan apps and their code, identifying potential privacy and data protection rule violations. It provides suggestions for remediation, making it easier for developers to ensure compliance.",
-  "reference_article": "Google integrates AI tool Checks into its privacy-focused products",
-  "reference_text": "After Google cut all but three of the projects at its in-house incubator Area 120 and shifted it to work on AI projects across Google, one of the legacy efforts — coincidentally also an AI project — is now officially exiting to Google. Checks, an AI-powered tool to check mobile apps for compliance with various privacy rules and regulations, is moving into Google proper as a privacy product aimed at mobile developers..."
+    "Question": "What is Checks and how does it help mobile developers with privacy compliance?",
+    "Answer": "Checks is an AI-powered tool developed by Google to help mobile developers ensure compliance with privacy rules and regulations. It uses artificial intelligence and machine learning to scan apps and their code, identifying potential violations of privacy and data protection rules. Checks provides remediation suggestions on how to fix these issues, making it easier for developers to address privacy concerns. The tool is integrated with Google's language models and app understanding technologies to power its identification and suggestion capabilities. It offers a dashboard for monitoring and triaging compliance issues in areas such as compliance monitoring, data monitoring, and store disclosure support. While it currently focuses on Google Play data safety, it may expand to include Apple App Store data safety in the future.",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
   },
   {
-  "question": "What acquisition has Databricks recently announced, and what is the focus of the acquired company's technology?",
-  "answer": "Databricks has recently acquired Okera, a data governance platform with a focus on AI. Okera's technology uses an AI-powered system to automatically discover, classify, and apply rules to personally identifiable information, with a particular emphasis on metadata. Additionally, Okera's isolation technology enforces governance control on arbitrary workloads without significant overhead. Databricks plans to integrate Okera's technology into its Unity Catalog, enhancing its existing governance solution for data and AI assets.",
-  "reference_article": "Databricks acquires AI-focused data governance platform Okera",
-  "reference_text": "Databricks today announced that it has acquired Okera, a data governance platform with a focus on AI. The two companies did not disclose the purchase price. According to Crunchbase, Okera previously raised just under $30 million. Investors include Felicis, Bessemer Venture Partners, Cyber Mentor Fund, ClearSky and Emergent Ventures."
-},
-  {
-"question": "What is the latest evolution in Slack's platform, particularly concerning AI, as announced at the Salesforce World Tour event?",
-"answer": "Slack has advanced from a pure communications platform to one facilitating direct integration with enterprise applications. At the Salesforce World Tour event in NYC, the company unveiled plans to place AI at the forefront of the user experience, aiming to enhance information retrieval and workflow creation. Notably, these features are still in development. The incorporation of AI into Slack involves various integrations, including SlackGPT, the company's generative AI built on the Slack platform. SlackGPT leverages the wealth of institutional knowledge within Slack's messages, files, and shared content to enable users and developers to build AI-driven experiences. The goal is to bring AI natively into the user experience with features like AI-powered conversation summaries and writing assistance directly available in Slack. Additionally, developers can integrate AI into workflows, tapping into external apps and large language models. EinsteinGPT, Salesforce's generative AI, will also be integrated into Slack, allowing employees to ask questions directly related to Salesforce content, enhancing teams' understanding of customer data. While these capabilities are still in development, Slack aims to provide users with flexibility and choice in incorporating AI into their work. SlackGPT and EinsteinGPT integration are in the development phase, but developers can already build custom integrations with various large language models (LLMs). Workflow Builder with SlackGPT AI connectors will be available this summer, allowing customers to connect ChatGPT or Claude to workflows or build custom connectors for their own LLMs.",
-"reference_article": "Slack integrates AI into its platform, unveiling plans for AI-driven experiences",
-"reference_text": "Slack has evolved from a pure communications platform to one that enables companies to link directly to enterprise applications without having to resort to dreaded task switching. Today, at the Salesforce World Tour event in NYC, the company announced the next step in its platform’s evolution where it will be putting AI at the forefront of the user experience, making it easier to get information and build workflows...\n"
+    "Question": "What are the two new products that Nova has announced to help brands police AI-generated content?",
+    "Answer": "The two new products that Nova has announced to help brands police AI-generated content are BrandGuard and BrandGPT.",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
   },
   {
-  "question": "What are the two new products announced by Nova, the startup building generative AI tools to protect brand integrity?",
-  "answer": "Nova has announced two new products: BrandGuard and BrandGPT. BrandGuard ingests a company's brand guidelines and style guide, using a series of models to check content against those rules for compliance, quality, adherence to style, and alignment with campaign goals. BrandGPT serves as an interface for asking questions about a brand's content rules in a ChatGPT-style interaction. These tools are designed to help brands safeguard their brand integrity when incorporating generative AI into their creative workflows.",
-  "reference_article": "Nova introduces BrandGuard and BrandGPT to protect brand integrity in AI-generated content",
-  "reference_text": "Nova is an early-stage startup building a suite of generative AI tools designed to protect brand integrity, and today, the company is announcing two new products to help brands police AI-generated content: BrandGuard and BrandGPT."
-},
+    "Question": "What is Pando's approach to solving supply chain challenges and how does it differentiate itself from other vendors?",
+    "Answer": "Pando aims to solve supply chain challenges by consolidating supply chain data from various sources and providing tools and apps for different tasks across freight procurement, trade and transport management, and more. It differentiates itself from other vendors like SAP and Oracle by offering no-code capabilities, allowing business users to customize the apps without the need for IT resources. Pando also utilizes algorithms and machine learning to make predictions and detect anomalies in the supply chain.",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
+  },
   {
-  "question": "What is the startup Spawning AI doing to address the legal issues between artists and companies training AI on their artwork?",
-  "answer": "Spawning AI, co-founded by Jordan Meyer and Mathew Dryhurst, has created HaveIBeenTrained, a website that allows creators to opt out of the training dataset for one art-generating AI model called Stable Diffusion v3. Spawning raised $3 million in a seed round led by True Ventures to further develop IP standards for the AI era, establish more robust opt-out and opt-in standards, and build the consent layer for AI. The company aims to make it easier for AI model trainers to honor opt-out requests, offer more services to organizations protecting artists' work, and grow to address different domains in the AI economy.",
-  "reference_article": "Spawning raises $3M to help artists opt out of AI training data",
-  "reference_text": "In an effort to grant artists more control over how — and where — their art’s used, Jordan Meyer and Mathew Dryhurst co-founded the startup Spawning AI. Spawning created HaveIBeenTrained, a website that allows creators to opt out of the training dataset for one art-generating AI model, Stable Diffusion v3, due to be released in the coming months."
-},
+    "Question": "What are some controversies surrounding ChatGPT?",
+    "Answer": "ChatGPT has been involved in several controversies. Discord integrated OpenAI's technology into its bot named Clyde, which was tricked into providing instructions for making illegal drugs and incendiary mixtures. There have been cases of ChatGPT accusing individuals of false crimes, and it has been banned by some school systems and colleges for promoting plagiarism and misinformation. Additionally, there have been concerns about defamation and the use of AI-generated content for SEO farming.",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
+  },
   {
-"question": "What is the U.K.'s Competition and Markets Authority (CMA) reviewing regarding AI?",
-"answer": "The CMA is conducting an initial review of 'AI foundational models,' which include large language models (LLMs) like OpenAI's ChatGPT and Microsoft's New Bing. The review aims to explore competition and consumer protection considerations in the development and use of AI foundational models. The CMA will examine how competitive markets for these models could evolve, explore opportunities and risks for competition and consumer protection, and produce guiding principles to support competition and protect consumers as AI foundation models develop. The review is in line with the U.K. government's instructions to regulators to analyze potential enforcements related to dangerous, unfair, and unaccountable applications of AI.",
-"reference_article": "U.K. competition watchdog launches review of AI foundational models",
-"reference_text": "The U.K.’s competition watchdog has announced an initial review of “AI foundational models”, such as the large language models (LLMs) which underpin OpenAI’s ChatGPT and Microsoft’s New Bing. Generative AI models which power AI art platforms such as OpenAI’s DALL-E or Midjourney will also likely fall in scope."
-},
+    "Question": "What are the concerns of writers regarding the use of AI in the entertainment industry?",
+    "Answer": "Writers are concerned that the use of AI in the entertainment industry could undermine their working conditions and devalue their labor. They argue that AI-generated content should not be considered as writers' work and that their job involves more than just scriptwriting. They also worry that studios may use AI as a way to demand more from writers in a shorter period of time without adequately compensating them. Additionally, the legal status of AI-generated content remains unclear, which further complicates the issue.",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
+  },
   {
-"question": "What is StarCoder and who developed it?",
-"answer": "StarCoder is a free alternative to code-generating AI systems, similar to GitHub's Copilot, developed by AI startup Hugging Face and ServiceNow Research, ServiceNow’s R&D division. It is part of Hugging Face's and ServiceNow’s BigCode project, which involves over 600 contributors. StarCoder is licensed for royalty-free use and was trained on over 80 programming languages using text from GitHub repositories. It integrates with Microsoft's Visual Studio Code code editor and claims to match or outperform the AI model from OpenAI used in the initial versions of Copilot.",
-"reference_article": "Hugging Face and ServiceNow Research release StarCoder, a free alternative to GitHub Copilot",
-"reference_text": "AI startup Hugging Face and ServiceNow Research, ServiceNow’s R&D division, have released StarCoder, a free alternative to code-generating AI systems along the lines of GitHub’s Copilot."
-},
+    "Question": "What new features is Microsoft adding to Bing?",
+    "Answer": "Not provided",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
+  },
   {
-"question": "What are the new features coming to Bing, and how does Microsoft plan to enhance its search experience?",
-"answer": "Microsoft is introducing new features to enhance Bing's search experience, focusing on AI and visual elements. Bing Chat, powered by OpenAI's GPT-4 and DALL-E 2 models, will offer more image- and graphic-centric answers. The chatbot will become more visual and personalized, allowing users to export their chat histories and integrate content from third-party plugins. Bing Chat will answer questions within the context of images. Bing will also improve transparency by providing citations for fact-based responses. The Bing Image Creator tool will understand more languages, and Bing Chat will gain the ability to create charts and graphs. Microsoft aims to make Bing more multimodal, allowing users to upload images for related searches. New chat features include chat history storage, export and share functionalities, and the addition of plugins from partners like OpenTable and Wolfram Alpha. Edge, Microsoft's browser, will also receive updates, featuring rounded corners, improved design elements, and actions that translate Bing Chat prompts into automations within the browser.",
-"reference_article": "Microsoft doubles down on AI with new Bing features",
-"reference_text": "Microsoft is embarking on the next phase of Bing’s expansion. And — no surprise — it heavily revolves around AI."
-}
+    "Question": "What is the U.K.'s competition watchdog reviewing in relation to AI?",
+    "Answer": "Not provided",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
+  },
+  {
+    "Question": "What is Spawning AI's solution to give artists more control over how their art is used in generative AI models?",
+    "Answer": "Not provided",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
+  },
+  {
+    "Question": "What is StarCoder and how does it compare to other code-generating AI systems?",
+    "Answer": "Not provided",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
+  },
+  {
+    "Question": "What is the focus of Okera's data governance platform and how does it use AI technology?",
+    "Answer": "Okera's data governance platform focuses on AI and uses AI-powered systems to automatically discover and classify personally identifiable information, tag it, and apply rules to it. It utilizes a no-code interface and emphasizes metadata.",
+    "Reference_article": "Not provided",
+    "Reference_text": "Not provided"
+  }
 ]
