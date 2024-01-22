@@ -61,13 +61,13 @@ def imagechat():
         },
     )
 
-    # Group Chat setup
-    groupchat = autogen.GroupChat(agents=[agent1, agent2, user_proxy], messages=[], max_round=5)
-    group_chat_manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=gpt4_llm_config)
+    # # Group Chat setup
+    # groupchat = autogen.GroupChat(agents=[agent1, agent2, user_proxy], messages=[], max_round=5)
+    # group_chat_manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=gpt4_llm_config)
 
-    # Initiate the chat with a message
-    user_proxy.initiate_chat(
-        group_chat_manager,
-        message="""Describe the image:
-                    <img path/url of image>."""
-    )
+    # # Initiate the chat with a message
+    # user_proxy.initiate_chat(
+    #     group_chat_manager,
+    #     message="""Describe the image:
+    #                 <img path/url of image>."""
+    # )
