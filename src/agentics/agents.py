@@ -1,4 +1,5 @@
 import autogen
+import pysqlite3 as sqlite3
 from autogen.oai.client import OpenAIWrapper
 from autogen.agentchat.assistant_agent import AssistantAgent
 from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent

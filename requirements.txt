@@ -12,3 +12,4 @@ openai
 Ipython
 pyautogen
 pypdf
+pysql3
