@@ -10,6 +10,5 @@ langchain
 huggingface_hub
 openai
 Ipython
-pyautogen
 pypdf
-pysql3
+pysqlite3-binary
