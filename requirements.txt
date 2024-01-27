@@ -11,4 +11,3 @@ huggingface_hub
 openai
 Ipython
 pypdf
-pysqlite3-binary

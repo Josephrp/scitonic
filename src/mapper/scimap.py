@@ -1,3 +1,5 @@
+# scitonic/src/mapper/scimap.py
+
 import openai
 
 class scimap:
@@ -32,16 +34,26 @@ class scimap:
         return response
 
 # ### Example Response :
-# ```json
-# {
-#   "Team": {
-#     "ClimateTeam": false,
-#     "Covid19Team": false,
-#     "FinanceTeam": false,
-#     "CodingTeam": true,
-#     "DebateTeam": false,
-#     "HomeworkTeam": false,
-#     "ConsultingTeam": false
-#   }
-# }
-# ```
+#{
+#   "id": "chatcmpl-8llkSPEQjqcTNq50tDuLJtW5MXbTU",
+#   "object": "chat.completion",
+#   "created": 1706395652,
+#   "model": "gpt-4-0125-preview",
+#   "choices": [
+#       {
+#           "index": 0,
+#           "message": {
+#               "role": "assistant",
+#               "content": "```json\n{\n  \"Team\": {\n    \"ClimateTeam\": false,\n    \"Covid19Team\": false,\n    \"FinanceTeam\": false,\n    \"CodingTeam\": true,\n    \"DebateTeam\": false,\n    \"HomeworkTeam\": false,\n    \"ConsultingTeam\": false\n  }\n}\n```"
+#            },
+#           "logprobs": null,
+#           "finish_reason": "stop"
+#       }
+#   ],
+#   "usage": {
+#       "prompt_tokens": 360,
+#       "completion_tokens": 67,
+#       "total_tokens": 427
+#   },
+#   "system_fingerprint": "fp_376b7f78b9"
+#}
