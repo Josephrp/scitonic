@@ -120,7 +120,3 @@ def parse_special_response(response):
         return "No team or task identified"
     except json.JSONDecodeError:
         return "Invalid JSON format"
-
-            return "No team identified"
-        except json.JSONDecodeError:
-            return "Invalid response format"
