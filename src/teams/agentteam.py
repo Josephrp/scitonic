@@ -1,7 +1,7 @@
 # scitonic/src/teams/agentteams.py
 
 import autogen
-import pysqlite3 as sqlite3
+import sqlite3
 from src.agentics.agents import AgentsFactory
 
 # agents_factory = AgentsFactory()
