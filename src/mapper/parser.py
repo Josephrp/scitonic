@@ -43,6 +43,17 @@ class MapperParser:
 
     @staticmethod
     def parse_teammapper_response(response):
+        print(response)
+        print(response.choices[0].message.content)
+        print(type(response.choices[0].message.content))
+        pattern = re.compile(r'"(\w+)": "YES"')
+
+        matches = pattern.findall(response.choices[0].message.content)
+        print("testbala")
+
+        for tas in matches:
+            print(tas)
+            return tas
         """Parses the response from scimap and returns the identified team."""
         if not response or 'choices' not in response or not response['choices']:
             return "No team identified"
