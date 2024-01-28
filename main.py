@@ -76,6 +76,7 @@ def process_query(oai_key, query, max_auto_reply):
     )
 
     # Initialize mappers
+    
     taskmapper = E5Mapper(oai_key)
     teammapper = scimap(oai_key)
 

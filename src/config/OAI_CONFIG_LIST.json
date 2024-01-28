@@ -1,25 +1,25 @@
 [
     {
         "model": "gpt-3.5-turbo-preview",
-        "api_key": "your OpenAI Key goes here",
+        "api_key": "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",
         "base_url": "https://api.openai.com/v1",
         "api_version": "2023-06-01-preview"
     },
     {
         "model": "gpt-4-preview",
-        "api_key": "your OpenAI Key goes here",
+        "api_key": "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",
         "base_url": "https://api.openai.com/v1",
         "api_version": "2023-06-01-preview"
     },
     {
         "model": "gpt-4-vision-preview",
-        "api_key": "your OpenAI Key goes here",
+        "api_key": "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",
         "base_url": "https://api.openai.com/v1",
         "api_version": "2023-06-01-preview"
     },
     {
         "model": "dall-e-3",
-        "api_key": "your OpenAI Key goes here",
+        "api_key": "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",
         "base_url": "https://api.openai.com/v1",
         "api_version": "2023-06-01-preview"
     }
