@@ -94,7 +94,7 @@ def process_query(oai_key, query, max_auto_reply):
 
     # Save dataset to a JSON file and get the file path
     json_file_name = "dataset.json"  # Provide a suitable file name
-    json_file_path = os.path.join("./src/datatonic/", json_file_name)  # Define the complete file path
+    json_file_path = os.path.join("src/datatonic/", json_file_name)  # Define the complete file path
     data_loader.save_to_json(dataset, json_file_path)
 
     # Initialize AgentsFactory with the path to the JSON file

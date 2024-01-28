@@ -9,7 +9,8 @@ class MapperParser:
         print(response)
         print(response.choices[0].message.content)
         print(type(response.choices[0].message.content))
-        pattern = re.compile(r'"(\w+)": "YES"')
+        
+        pattern = re.compile(r'"task": \{[^}]*"([^"]+)": true[^}]*\}')
 
         matches = pattern.findall(response.choices[0].message.content)
         print("testbala")
