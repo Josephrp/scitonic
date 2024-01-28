@@ -23,7 +23,7 @@ class scimap:
         ]
 
         response = self.client.chat.completions.create(
-            model="gpt-4-1106-preview",
+            model="gpt-4-turbo-preview",
             messages=messages,
             temperature=temperature,
             max_tokens=max_tokens,
