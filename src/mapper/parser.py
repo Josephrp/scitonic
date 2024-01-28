@@ -1,4 +1,5 @@
 # scitonic/src/mapper/parser.py
+import json
 
 class MapperParser:
     @staticmethod

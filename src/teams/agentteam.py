@@ -6,12 +6,10 @@ from src.agentics.agents import AgentsFactory
 
 # agents_factory = AgentsFactory()
 
-# Function to reset agents
 def _reset_agents():
     scitonic.reset()
 
 
-# Define functions for each team
 def codingteam():
     _reset_agents()
     team = autogen.GroupChat(
