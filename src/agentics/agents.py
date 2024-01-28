@@ -29,7 +29,7 @@ def termination_msg(self, x):
         return isinstance(x, dict) and "TERMINATE" == str(x.get("content", ""))[-9:].upper()
 
 class AgentsFactory:
-    def __init__(self, llm_config, db_path):
+    def __init__(self, llm_config, db_path=None):
         self.llm_config = llm_config
         self.db_path = db_path
 
