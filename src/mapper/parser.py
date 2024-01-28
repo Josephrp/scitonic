@@ -12,15 +12,12 @@ class MapperParser:
         pattern = re.compile(r'"(\w+)": "YES"')
 
         matches = pattern.findall(response.choices[0].message.content)
-        print("testbala")
+#       print("testbala")
 
         for task in matches:
             print(task)
             return task
                
-
-        
-        
         #task_data = json.loads(response.choices[0].message.content)
         if not response or 'choices' not in response or not response['choices']:
             return "No task identified3"
@@ -29,7 +26,6 @@ class MapperParser:
         
         if not assistant_message:
             return "No task identified1"
-
         try:
             task_data = json.loads(assistant_message)
             print("json conversion working")
@@ -50,7 +46,6 @@ class MapperParser:
         
         if not assistant_message:
             return "No team identified"
-
         try:
             team_data = json.loads(assistant_message)
             for team, is_selected in team_data.get('Team', {}).items():

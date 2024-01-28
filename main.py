@@ -6,7 +6,7 @@ import autogen
 import json
 from src.mapper.e5map import E5Mapper
 from src.mapper.scimap import scimap
-from src.mapper.parser import MapperParser, serialize_chat_completion
+from src.mapper.parser import MapperParser
 from src.datatonic.dataloader import DataLoader
 from src.teams.agentteam import codingteam, covid19team, financeteam, debateteam, homeworkteam, consultingteam
 from src.agentics.agents import AgentsFactory
