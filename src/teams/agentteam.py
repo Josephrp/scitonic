@@ -2,12 +2,27 @@
 
 import autogen
 import sqlite3
+import autogen
 from src.agentics.agents import AgentsFactory
+config_list = autogen.config_list_from_json(
+    "OAI_CONFIG_LIST.json",
+    file_location="./src/config/",
+    filter_dict={
+        "model": ["gpt-3.5-turbo-preview", "gpt-4-preview", "gpt-4-vision-preview", "dall-e-3"],
+    },
+)
+llm_config = {
+         "timeout": 60,
+         "cache_seed": 42,
+         "config_list": config_list,
+         "temperature": 0,
+     }
 
-# agents_factory = AgentsFactory()
 
-def _reset_agents():
-    scitonic.reset()
+ag = AgentsFactory(llm_config)
+
+#def _reset_agents():
+#    ag.scitonic.reset()
 
 
 def codingteam():
@@ -23,9 +38,9 @@ def codingteam():
     scitonic.initiate_chat(manager, problem=PROBLEM, n_results=3)
 
 def covid19team():
-    _reset_agents()
+    #_reset_agents()
     team = autogen.GroupChat(
-        agents=[scitonic, covid19_scientist, healthcare_expert, finance_analyst],
+        agents=[ag.scitonic, ag.covid19_scientist, ag.healthcare_expert, ag.finance_analyst],
         messages=[],
         max_round=12
     )
