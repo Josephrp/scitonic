@@ -16,7 +16,8 @@ class E5Mapper:
             {
                 "role": "user",
                 "content": user_input
-            },
+            }
+        ]
 
         response = self.client.chat.completions.create(
             model="gpt-4-turbo-preview",
