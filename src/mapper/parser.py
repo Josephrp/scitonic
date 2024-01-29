@@ -92,6 +92,9 @@ class MapperParser:
         }
     
         return json.dumps(serializable_dict, ensure_ascii=False)
+    except Exception as e:
+        print(f"Error during serialization: {e}")
+        return None
 
 def parse_special_response(response):
     """
